@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <title>Изменение пользователя</title>
 </head>
 <body>
-$END$
+<form th:method="PATCH" th:object="${person}" th:action="@{/people/{id}(id=${person.getId()})}">
+    <label for="fullName">Изменить имя</label>
+    <input type="text" th:field="*{fullName}" id="fullName">
+    <br>
+    <label for="yearOfBirth">Изменить дату рождения</label>
+    <input type="text" th:field="*{yearOfBirth}" id="yearOfBirth">
+    <br>
+    <input type="submit" value="Изменить">
+
+</form>
+
+
 </body>
 </html>
