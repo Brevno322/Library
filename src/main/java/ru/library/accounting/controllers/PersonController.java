@@ -4,38 +4,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.library.accounting.dao.BookDAO;
-import ru.library.accounting.dao.PersonDAO;
-import ru.library.accounting.model.Person;
-import ru.library.accounting.util.BookValidation;
-import ru.library.accounting.util.PersonValidation;
+import ru.library.accounting.models.Person;
+import ru.library.accounting.service.BookService;
+import ru.library.accounting.service.PersonService;
+
 
 @Controller
 @RequestMapping("/people")
 public class PersonController {
-    private final PersonDAO personDAO;
-    private final PersonValidation personValidation;
-    private final BookDAO bookDAO;
-    private final BookValidation bookValidation;
+    private final PersonService personService;
+    // private final PersonValidation personValidation;
+    private final BookService bookService;
+    // private final BookValidation bookValidation;
 
     @Autowired
-    public PersonController(PersonDAO personDAO, PersonValidation personValidation, BookDAO bookDAO, BookValidation bookValidation) {
-        this.personDAO = personDAO;
-        this.personValidation = personValidation;
-        this.bookDAO = bookDAO;
-        this.bookValidation = bookValidation;
+    public PersonController(PersonService personService, BookService bookService) {
+        this.personService = personService;
+        this.bookService = bookService;
     }
 
     @GetMapping()
     public String showAllPerson(Model model) {
-        model.addAttribute("people", personDAO.showAllPerson());
+        model.addAttribute("people", personService.index());
         return "person/showAllPerson";
     }
 
     @GetMapping("/{id}")
     public String showPersonId(@PathVariable("id") int id, Model model) {
-        model.addAttribute("person", personDAO.showPersonId(id));
-        model.addAttribute("books",bookDAO.showBookByIdPerson(id));
+        model.addAttribute("person", personService.showPersonById(id));
+        model.addAttribute("books", bookService.showBookByIdPerson(id));
         return "person/showPersonId";
     }
 
@@ -46,24 +43,25 @@ public class PersonController {
 
     @PostMapping
     public String create(@ModelAttribute("persona") Person person) {
-        personDAO.save(person);
+        personService.savePerson(person);
         return "redirect:/people";
     }
+
     @GetMapping("/{id}/edit")
-    public String editPerson(@PathVariable("id") int id,Model model){
-        model.addAttribute("person",personDAO.showPersonId(id));
-        return"person/edit";
+    public String editPerson(@PathVariable("id") int id, Model model) {
+        model.addAttribute("person", personService.showPersonById(id));
+        return "person/edit";
     }
 
     @PatchMapping("/{id}")
-    public String updatePerson(@PathVariable("id") int id,@ModelAttribute("person") Person person){
-       personDAO.updatePerson(id,person);
+    public String updatePerson(@PathVariable("id") int id, @ModelAttribute("person") Person person) {
+        personService.updatePerson(id, person);
         return "redirect:/people";
     }
 
     @DeleteMapping("/{id}")
-    public String deletePerson(@PathVariable("id") int id,@ModelAttribute("person") Person person){
-        personDAO.delete(id);
+    public String deletePerson(@PathVariable("id") int id, @ModelAttribute("person") Person person) {
+        personService.deletePerson(id);
         return "redirect:/people";
 
     }

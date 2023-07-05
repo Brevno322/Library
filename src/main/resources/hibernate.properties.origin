@@ -1,0 +1,4 @@
+hibernate.driver=
+hibernate.url=
+hibernate.username_value=
+hibernate.user_password=
