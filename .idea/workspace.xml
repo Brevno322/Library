@@ -9,29 +9,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f7ae82f-2537-4b37-881f-42df61567d0a" name="Changes" comment="finish">
-      <change afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/library/accounting/models/Book.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/library/accounting/models/Person.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/library/accounting/repositories/BookRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/library/accounting/repositories/PersonRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/library/accounting/service/BookService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/library/accounting/service/PersonService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/hibernate.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+    <list default="true" id="6f7ae82f-2537-4b37-881f-42df61567d0a" name="Changes" comment="add hibernate jpa">
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/library/accounting/util/PersonValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/book/search.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/library/accounting/config/SpringConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/library/accounting/config/SpringConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/library/accounting/controllers/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/library/accounting/controllers/BookController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/library/accounting/controllers/PersonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/library/accounting/controllers/PersonController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/library/accounting/dao/BookDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/library/accounting/dao/PersonDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/library/accounting/model/Book.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/library/accounting/model/Person.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/library/accounting/util/BookValidation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/library/accounting/util/PersonValidation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/database.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/database.properties.origin" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.properties.origin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/library/accounting/models/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/library/accounting/models/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/library/accounting/models/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/library/accounting/models/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/library/accounting/repositories/BookRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/library/accounting/repositories/BookRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/library/accounting/repositories/PersonRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/library/accounting/repositories/PersonRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/library/accounting/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/library/accounting/service/BookService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/library/accounting/service/PersonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/library/accounting/service/PersonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/book/showAllBooks.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/book/showAllBooks.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/book/showBook.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/book/showBook.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/person/showPersonId.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/person/showPersonId.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -82,24 +74,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
-    "spring.configuration.checksum": "e115a30d15102bcbad3774f20012390d"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.haulmont.jpb.viewMode&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;e115a30d15102bcbad3774f20012390d&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Tomcat 9.0.68" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.68" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="UPDATING_POLICY" value="restart-server" />
@@ -205,7 +197,11 @@
       <workItem from="1687591155378" duration="13905000" />
       <workItem from="1688296294559" duration="2449000" />
       <workItem from="1688495766624" duration="7024000" />
-      <workItem from="1688541147283" duration="10305000" />
+      <workItem from="1688541147283" duration="14169000" />
+      <workItem from="1688671352504" duration="2982000" />
+      <workItem from="1688805125946" duration="14085000" />
+      <workItem from="1688824000415" duration="2154000" />
+      <workItem from="1688891475286" duration="586000" />
     </task>
     <task id="LOCAL-00001" summary="finish">
       <created>1687606684429</created>
@@ -214,7 +210,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687606684429</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add hibernate jpa">
+      <created>1688555246746</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1688555246746</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -233,6 +236,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="finish" />
-    <option name="LAST_COMMIT_MESSAGE" value="finish" />
+    <MESSAGE value="add hibernate jpa" />
+    <option name="LAST_COMMIT_MESSAGE" value="add hibernate jpa" />
   </component>
 </project>

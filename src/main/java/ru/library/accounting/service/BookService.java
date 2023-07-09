@@ -1,7 +1,8 @@
 package ru.library.accounting.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.library.accounting.models.Book;
@@ -25,8 +26,18 @@ public class BookService {
     }
 
 
-    public List<Book> showAllBooks() {
-        return bookRepository.findAll();
+    public List<Book> showAllBooks(boolean sortBy) {
+        if (sortBy) {
+            return bookRepository.findAll(Sort.by("year"));
+        } else
+            return bookRepository.findAll();
+    }
+
+    public List<Book> findWithPagination(Integer page, Integer booksPerPage, boolean sortByYear) {
+        if (sortByYear) {
+            return bookRepository.findAll(PageRequest.of(page, booksPerPage, Sort.by("year"))).getContent();
+        } else
+            return bookRepository.findAll(PageRequest.of(page, booksPerPage)).getContent();
     }
 
 
@@ -35,15 +46,16 @@ public class BookService {
         return bookFound.orElse(null);
     }
 
-    public List<Book> showBookByIdPerson(int id) {
-        return bookRepository.showBookByIdPerson(id);
+    public List<Book> searchBook(String name) {
+        return bookRepository.findBookByNameStartingWith(name);
     }
 
-
     @Transactional
-    public void updateBook(int id, Book book) {
-        book.setId(id);
-        bookRepository.save(book);
+    public void updateBook(int id, Book updateBook) {
+        Book bookToBeUpdate=bookRepository.findById(id).get();
+        updateBook.setId(id);
+        updateBook.setPerson(bookToBeUpdate.getPerson());
+        bookRepository.save(updateBook);
     }
 
     @Transactional
@@ -51,27 +63,29 @@ public class BookService {
         bookRepository.save(book);
     }
 
-    //    @Transactional
-//    public void orderBook(int id, Person person) {
-//        bookRepository.orderBook(id, person);
-//    }
+
     @Transactional
-    public void orderBook(int id, Person person, Book book) {
-        book.setId(id);
-        book.setPerson(person);
-        book.setDataOfIssue(new Date());
-        bookRepository.save(book);
+    public void orderBook(int id, Person person) {
+        bookRepository.findById(id).ifPresent(book -> {
+            book.setDataOfIssue(new Date());
+            book.setPerson(person);
+        });
+
     }
 
 
     @Transactional
     public void returnBook(int id) {
-        Book book = bookRepository.findById(id).orElse(null);
-        assert book != null;
-        book.setPerson(null);
-        bookRepository.save(book);
-
+        bookRepository.findById(id).ifPresent(book -> {
+            book.setPerson(null);
+            book.setDataOfIssue(null);
+        });
     }
+
+    public Person getBookOwner(int id) {
+        return bookRepository.findById(id).map(Book::getPerson).orElse(null);
+    }
+
 
     @Transactional
     public void deleteBook(int id) {

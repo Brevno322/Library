@@ -61,13 +61,5 @@ public class Person {
         this.books = books;
     }
 
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", fullName='" + fullName + '\'' +
-                ", yearOfBirth=" + yearOfBirth +
-                ", books=" + books +
-                '}';
-    }
+
 }

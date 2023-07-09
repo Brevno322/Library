@@ -1,13 +1,14 @@
 package ru.library.accounting.service;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.library.accounting.models.Book;
 import ru.library.accounting.models.Person;
 import ru.library.accounting.repositories.PersonRepository;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional(readOnly = true)
@@ -15,12 +16,11 @@ public class PersonService {
 
     private final PersonRepository personRepository;
 
-    private final BookService bookService;
 
     @Autowired
-    public PersonService(PersonRepository personRepository, BookService bookService) {
+    public PersonService(PersonRepository personRepository) {
         this.personRepository = personRepository;
-        this.bookService = bookService;
+
     }
 
 
@@ -35,9 +35,29 @@ public class PersonService {
         return foundPerson.orElse(null);
     }
 
-    @Transactional
-    public Optional<Person> showPersonByIdBook(int id) {
-        return personRepository.findBookByPersonId(id);
+
+    public List<Book> getBooksByPersonId(int id) {
+        Optional<Person> person = personRepository.findById(id);
+
+        if (person.isPresent()) {
+            Hibernate.initialize(person.get().getBooks());
+
+
+            person.get().getBooks().forEach(book -> {
+                long diffInMillies = Math.abs(book.getDataOfIssue().getTime() - new Date().getTime());
+
+                if (diffInMillies > 864000000)
+                    book.setExpired(true);
+            });
+
+            return person.get().getBooks();
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
+    public Optional<Person> getPersonByFullName(String name) {
+        return personRepository.findPersonByFullName(name);
     }
 
     @Transactional

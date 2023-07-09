@@ -9,9 +9,6 @@ import ru.library.accounting.models.Person;
 import ru.library.accounting.service.BookService;
 import ru.library.accounting.service.PersonService;
 
-
-import java.util.Optional;
-
 @Controller
 @RequestMapping("/books")
 public class BookController {
@@ -38,17 +35,22 @@ public class BookController {
     }
 
     @GetMapping()
-    public String showAllBooks(Model model) {
-        model.addAttribute("books", bookService.showAllBooks());
+    public String showAllBooks(Model model, @RequestParam(value = "page", required = false) Integer page,
+                               @RequestParam(value = "books_per_page", required = false) Integer booksParePage,
+                               @RequestParam(value = "sort_by_year", required = false) boolean sortByYear) {
+        if (page == null || booksParePage == null) {
+            model.addAttribute("books", bookService.showAllBooks(sortByYear));
+        } else
+            model.addAttribute("books", bookService.findWithPagination(page, booksParePage, sortByYear));
         return "book/showAllBooks";
     }
 
     @GetMapping("/{id}")
-    public String showBook(@PathVariable("id") int id, Model model, Person person) {
+    public String showBook(@PathVariable("id") int id, Model model, @ModelAttribute("person") Person person) {
         model.addAttribute("book", bookService.showBook(id));
-        model.addAttribute("person", person);
-        Optional<Person> bookOwner = personService.showPersonByIdBook(id);
-        if (bookOwner.isPresent()) {
+
+        Person bookOwner=bookService.getBookOwner(id);
+        if (bookOwner != null) {
             model.addAttribute("owner", bookOwner);
         } else {
             model.addAttribute("people", personService.index());
@@ -73,8 +75,7 @@ public class BookController {
 
     @PatchMapping("/{id}/order")
     public String orderBook(@PathVariable("id") int id, @ModelAttribute("person") Person person) {
-        Book book=bookService.showBook(id);
-        bookService.orderBook(id, person,book);
+        bookService.orderBook(id, person);
         return "redirect:/books";
     }
 
@@ -89,6 +90,17 @@ public class BookController {
     public String deleteBook(@PathVariable("id") int id, @ModelAttribute("book") Book book) {
         bookService.deleteBook(id);
         return "redirect:/books";
+    }
+
+    @GetMapping("/search")
+    public String search() {
+        return "book/search";
+    }
+
+    @PostMapping("/search")
+    public String makeSearch(@RequestParam("name") String name, Model model) {
+        model.addAttribute("books", bookService.searchBook(name));
+        return "book/search";
     }
 
 

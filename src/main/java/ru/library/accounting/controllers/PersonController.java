@@ -13,14 +13,14 @@ import ru.library.accounting.service.PersonService;
 @RequestMapping("/people")
 public class PersonController {
     private final PersonService personService;
-    // private final PersonValidation personValidation;
-    private final BookService bookService;
-    // private final BookValidation bookValidation;
+
+
+
 
     @Autowired
-    public PersonController(PersonService personService, BookService bookService) {
+    public PersonController(PersonService personService) {
         this.personService = personService;
-        this.bookService = bookService;
+
     }
 
     @GetMapping()
@@ -32,7 +32,7 @@ public class PersonController {
     @GetMapping("/{id}")
     public String showPersonId(@PathVariable("id") int id, Model model) {
         model.addAttribute("person", personService.showPersonById(id));
-        model.addAttribute("books", bookService.showBookByIdPerson(id));
+        model.addAttribute("books", personService.getBooksByPersonId(id));
         return "person/showPersonId";
     }
 

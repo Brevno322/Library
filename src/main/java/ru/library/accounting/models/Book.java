@@ -1,7 +1,9 @@
 package ru.library.accounting.models;
 
 import javax.persistence.*;
+
 import java.util.Date;
+
 
 @Entity
 @Table(name = "book")
@@ -28,6 +30,9 @@ public class Book {
     @Column(name = "year")
     private int year;
 
+    @Transient
+    private boolean expired;
+
     public Book() {
     }
 
@@ -36,6 +41,8 @@ public class Book {
         this.author = author;
         this.year = year;
     }
+
+
 
     public int getId() {
         return id;
@@ -85,15 +92,12 @@ public class Book {
         this.year = year;
     }
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", person=" + person +
-                ", dataOfIssue=" + dataOfIssue +
-                ", name='" + name + '\'' +
-                ", author='" + author + '\'' +
-                ", year=" + year +
-                '}';
+
+    public boolean isExpired() {
+        return expired;
+    }
+
+    public void setExpired(boolean expired) {
+        this.expired = expired;
     }
 }
